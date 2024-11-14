@@ -1,0 +1,30 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-nav {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dashboard-nav a {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.dashboard-nav a:hover {
+  background-color: #e9ecef;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+} 
