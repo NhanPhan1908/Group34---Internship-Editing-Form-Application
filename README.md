@@ -13,4 +13,4 @@ Members
 |BI12-144|Bui Ngoc Hai|
 |BI12-148|Hoang Hai|
 |BI11-234|Duong Nghia Quyet|
-|BI11-164|Bui Minh|
+|BI11-164|Bui Dac Minh|

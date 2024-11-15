@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <style>
+        /* Basic styling for layout */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            color: red;
+            transition: all 0.4s ease;
+        }
+        .register-form {
+            display: none; /* Initially hidden */
+        }
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Login Form -->
+    <h2 id="formTitle">Log In</h2>
+    <form id="loginForm" action="/login" method="POST">
+        <div class="form-group">
+            <label for="loginUsername">Username:</label>
+            <input type="text" name="username" id="loginUsername" required>
+        </div>
+        <div class="form-group">
+            <label for="loginPassword">Password:</label>
+            <input type="password" name="password" id="loginPassword" required>
+        </div>
+        <button type="submit" style="font-weight: bold; font-size: 16px; text-decoration: none">Log In</button>
+    </form>
+    <button class="toggle-btn" style="font-weight: bold; font-size: 16px; text-decoration: none" onclick="toggleRegisterForm()">First to visit? Please Register!</button>
+
+    <!-- Register Form (initially hidden) -->
+    <div class="register-form" id="registerForm">
+        <h2>Register</h2>
+        <form action="/register" method="POST">
+            <div class="form-group">
+                <label for="registerUsername">Username:</label>
+                <input type="text" name="username" id="registerUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Password:</label>
+                <input type="password" name="password" id="registerPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select name="role" id="role" required>
+                    <option value="student">Student</option>
+                    <option value="supervisor">Supervisor</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button type="submit" style="font-weight: bold; font-size: 16px; text-decoration: none">Register</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleRegisterForm() {
+        const registerForm = document.getElementById('registerForm');
+        const loginForm = document.getElementById('loginForm');
+        const formTitle = document.getElementById('formTitle');
+        const toggleButton = document.querySelector('.toggle-btn');
+
+        if (registerForm.style.display === 'none' || registerForm.style.display === '') {
+            registerForm.style.display = 'block';
+            loginForm.style.display = 'none';
+            formTitle.textContent = ''; // Remove the title
+            toggleButton.textContent = 'Already had an account? Please log in!'; // Change button text
+
+        } else {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            formTitle.textContent = 'Log In'; // Restore the title
+            toggleButton.textContent = 'First to visit? Please Register!'; // Restore button text
+        }
+    }
+</script>
+
+</body>
+</html>
