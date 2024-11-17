@@ -1,0 +1,26 @@
+{
+    "name": "group34---internship-editing-form-application",
+    "version": "1.0.0",
+    "description": "Group Info:\n=====================================\n* Group ID: \"34\"\n* Project Name: \"Internship Form Edit Online\"",
+    "main": "index.js",
+    "scripts": {
+      "start": "PORT=5000 node server.js",
+      "devStart": "nodemon server.js",
+      "devStartAuth": "nodemon authServer.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "dotenv": "^16.0.3",
+      "express": "^4.21.1",
+      "jsonwebtoken": "^9.0.2",
+      "uuid": "^11.0.3",
+      "uuidv4": "^6.2.13"
+    },
+    "devDependencies": {
+      "nodemon": "^3.1.7"
+    }
+  }
+  
