@@ -1,12 +1,24 @@
 import React from 'react';
-import Login from './component/Login/Login';  // Import component Login
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './component/Login/Login';
+import Dashboard from './component/Dashboard/Dashboard';
+
+import Document from './component/Document/Document';  
+import Information from './component/Information/Information';  
+import Setting from './component/Setting/Setting';  
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to Student Management System</h1>
-      <Login />  {/* Render component Login */}
-    </div>
+    <Router> 
+      <Routes>
+        <Route path="/" element={<Login />} />  
+        <Route path="dashboard" element={<Dashboard />}>  
+          <Route path="document" element={<Document />} />
+          <Route path="information" element={<Information />} />
+          <Route path="setting" element={<Setting />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
