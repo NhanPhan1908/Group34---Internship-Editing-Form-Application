@@ -1,0 +1,45 @@
+
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-item {
+  margin: 15px 0;
+  cursor: pointer; 
+}
+
+.sidebar-item span {
+  font-weight: bold;
+}
+
+.sidebar-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.sidebar-item a:hover {
+  color: #4CAF50;
+}
+
+.submenu {
+  margin-left: 20px;
+  display: none; 
+}
+
+.submenu a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+
+.submenu a:hover {
+  color: #4CAF50;
+}
+
+
+.sidebar-item .submenu {
+  display: block; 
+}
