@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './Information.css';
 
 function Information() {
-  // Dữ liệu giả (mock data)
   const [info] = useState({
     student: {
       name: "Nguyễn Văn A",

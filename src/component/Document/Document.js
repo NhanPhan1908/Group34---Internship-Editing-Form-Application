@@ -109,7 +109,7 @@ function Document() {
             setSearchQuery(""); // Optionally clear search query as well
           }}
         >
-          Re
+          Reset
         </button>
 
         <button className="add-button">+</button>

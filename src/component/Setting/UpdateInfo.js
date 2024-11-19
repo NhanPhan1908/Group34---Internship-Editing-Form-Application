@@ -3,7 +3,7 @@ import "./UpdateInfo.css";
 
 function UpdateInfo() {
   const [formData, setFormData] = useState({
-    name: "John Doe", // Dữ liệu nhập từ trước (nếu có)
+    name: "John Doe", 
     dob: "",
     studentId: "",
     department: "",

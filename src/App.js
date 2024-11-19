@@ -30,8 +30,6 @@ function App() {
           <Route path="information" element={<Information />} />
           <Route path="setting" element={<Setting />} />
           <Route path="setting/update-info" element={<UpdateInfo />} />
-
-          
           <Route path="information/student-detail" element={<StudentDetail />} />
           <Route path="information/external-supervisor-detail" element={<ExternalSupervisorDetail />} />
           <Route path="information/internal-supervisor-detail" element={<InternalSupervisorDetail />} />
