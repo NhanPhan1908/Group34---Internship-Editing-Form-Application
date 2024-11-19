@@ -13,19 +13,18 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    
+
+    // Kiểm tra mật khẩu có khớp không
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
 
-    
+    // Giả lập xử lý đăng ký
     console.log('User signed up:', { firstName, lastName, email, role, password });
-    
-
     alert('Sign up successful! Redirecting to dashboard...');
-    navigate('/dashboard'); 
+    navigate('/dashboard'); // Điều hướng sau khi đăng ký thành công
+  };
 
   return (
     <div className="signup-container">
@@ -112,5 +111,5 @@ function SignUp() {
     </div>
   );
 }
-}
+
 export default SignUp;

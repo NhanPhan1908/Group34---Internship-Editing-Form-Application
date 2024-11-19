@@ -1,0 +1,39 @@
+.company-detail-container {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fefefe;
+  }
+  
+  .company-detail-container h2 {
+    color: #222;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .company-detail-container p {
+    margin: 10px 0;
+    color: #444;
+    line-height: 1.5;
+  }
+  
+  .company-detail-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .company-detail-container ul li {
+    margin: 10px 0;
+  }
+  
+  .company-detail-container ul li a {
+    text-decoration: none;
+    color: #16a34a;
+  }
+  
+  .company-detail-container ul li a:hover {
+    text-decoration: underline;
+  }
+  

@@ -21,21 +21,23 @@
   .filter-actions {
     display: inline-flex;
     gap: 5px;
+
   }
   
   .filter-actions button {
-    height: 32px;
+    height: 36px;
     padding: 8px 16px;
     background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: -15px;
   }
   
   .filter-actions .add-button {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: flex;
     justify-content: center;
     align-items: center;

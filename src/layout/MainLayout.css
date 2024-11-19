@@ -1,40 +1,33 @@
-
 .main-layout {
   display: flex;
   flex-direction: column; 
-  height: 100vh; 
+  height: 200vh; 
+  overflow: hidden; 
 }
+
 
 .layout-content {
   display: flex; 
-  flex: 1; 
+  flex: 1;
   margin-top: 60px; 
+  position: relative;
 }
 
 .sidebar {
   width: 250px; 
-  height: 100vh; 
-  background-color: #2c3e50;
+  height: calc(100vh - 60px); 
   color: white;
-  position: fixed; 
-  top: 60px; 
-}
-
-.top-navbar {
-  height: 60px;
-  background-color: #34495e;
-  color: white;
-  position: sticky; 
-  top: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
+  position: fixed;
+  top: 68px; 
+  left: 0;
+  z-index: 999; 
 }
 
 .content {
-  flex: 1;
-  overflow: auto;
+  flex: 1; 
+  overflow: auto; 
   padding: 20px;
   margin-left: 250px; 
+  padding-left: 60px;
+  padding-right: 60px;
 }

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./WorkManager.css";
 
-
 function WorkManager() {
   const navigate = useNavigate();
 
+  // Dummy data
   const dummyData = Array.from({ length: 40 }, (_, index) => ({
     id: index + 1,
     name: `File ${index + 1}`,
@@ -13,11 +13,22 @@ function WorkManager() {
     image: `https://picsum.photos/200/150?random=${index + 1}`,
   }));
 
+  // States for current page, search, and selected filter
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
+  const [filter, setFilter] = useState("all");
+  
   const itemsPerPage = 8;
 
-  const totalPages = Math.ceil(dummyData.length / itemsPerPage);
-  const paginatedData = dummyData.slice(
+  // Filtered data based on search and filter
+  const filteredData = dummyData.filter((item) => {
+    const matchesSearch = item.name.toLowerCase().includes(searchText.toLowerCase());
+    const matchesFilter = filter === "all" || item.date.startsWith(filter);
+    return matchesSearch && matchesFilter;
+  });
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const paginatedData = filteredData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -38,16 +49,32 @@ function WorkManager() {
     navigate(`/edit/${id}`);
   };
 
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+    setCurrentPage(1); // Reset to the first page on search
+  };
+
+  const handleFilterChange = (filterType) => {
+    setFilter(filterType);
+    setCurrentPage(1); // Reset to the first page when filter changes
+  };
+
   return (
     <div className="work-manager">
       <div className="top-actions">
         <div className="search-bar">
-          <input type="text" placeholder="Search files..." />
+          <input
+            type="text"
+            placeholder="Search files..."
+            value={searchText}
+            onChange={handleSearchChange}
+          />
         </div>
         <div className="filter-actions">
-          <button>New</button>
-          <button>Old</button>
-          <button>Usual</button>
+          <button onClick={() => handleFilterChange("all")}>All</button>
+          <button onClick={() => handleFilterChange("2024-11-01")}>New</button>
+          <button onClick={() => handleFilterChange("2024-11-30")}>Old</button>
+          <button onClick={() => handleFilterChange("usual")}>Usual</button>
           <button className="add-button">+</button>
         </div>
       </div>
