@@ -2,6 +2,11 @@ import React from 'react';
 import './StudentDetail.css';
 
 function StudentDetail() {
+  const handlePreview = (fileType) => {
+    
+    window.location.href = `/preview/${fileType}`;
+  };
+
   return (
     <div className="student-detail">
       <h2>Chi tiết thông tin sinh viên</h2>
@@ -15,10 +20,19 @@ function StudentDetail() {
       <p><strong>Chủ đề thực tập:</strong> Phát triển ứng dụng web</p>
 
       <h3>Giấy tờ liên quan</h3>
-      <ul>
-        <li><a href="/path/to/document1.pdf" target="_blank" rel="noopener noreferrer">Giấy tờ 1</a></li>
-        <li><a href="/path/to/document2.pdf" target="_blank" rel="noopener noreferrer">Giấy tờ 2</a></li>
-      </ul>
+      <div className="document-container">
+        <div className="document" onClick={() => handlePreview('document1')}>
+          <img src="https://via.placeholder.com/250x170?text=Document1" alt="Giấy tờ 1" />
+        
+        </div>
+        <div className="document" onClick={() => handlePreview('document2')}>
+          <img src="https://via.placeholder.com/250x170?text=Document2" alt="Giấy tờ 2" />
+          
+        </div>
+      </div>
+
+      {/* Nếu bạn có thể thêm ảnh ở đây cho các tài liệu */}
+      {/* <img src="link-to-document-image" alt="Giấy tờ" /> */}
     </div>
   );
 }

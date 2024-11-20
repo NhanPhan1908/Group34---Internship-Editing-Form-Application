@@ -5,7 +5,6 @@ import "./WorkManager.css";
 function WorkManager() {
   const navigate = useNavigate();
 
-  // Dummy data
   const dummyData = Array.from({ length: 40 }, (_, index) => ({
     id: index + 1,
     name: `File ${index + 1}`,
@@ -13,25 +12,23 @@ function WorkManager() {
     image: `https://picsum.photos/200/150?random=${index + 1}`,
   }));
 
-  // States for current page, search, and selected filter
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const [filter, setFilter] = useState("all");
-  
+
   const itemsPerPage = 8;
 
-  // Filtered data based on search and filter
   const filteredData = dummyData.filter((item) => {
     const matchesSearch = item.name.toLowerCase().includes(searchText.toLowerCase());
     const matchesFilter = filter === "all" || item.date.startsWith(filter);
     return matchesSearch && matchesFilter;
   });
 
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const paginatedData = filteredData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const totalPages = Math.ceil((filteredData.length + 1) / itemsPerPage);
+  const paginatedData = [
+    ...filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage - 1),
+    { id: "add", name: "Add New File", date: "", image: "https://via.placeholder.com/200x150?text=+" },
+  ];
 
   const handlePrevious = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -46,17 +43,21 @@ function WorkManager() {
   };
 
   const handleImageClick = (id) => {
-    navigate(`/edit/${id}`);
+    if (id === "add") {
+      navigate("/create");
+    } else {
+      navigate(`/edit/${id}`);
+    }
   };
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
-    setCurrentPage(1); // Reset to the first page on search
+    setCurrentPage(1);
   };
 
   const handleFilterChange = (filterType) => {
     setFilter(filterType);
-    setCurrentPage(1); // Reset to the first page when filter changes
+    setCurrentPage(1);
   };
 
   return (
@@ -75,14 +76,13 @@ function WorkManager() {
           <button onClick={() => handleFilterChange("2024-11-01")}>New</button>
           <button onClick={() => handleFilterChange("2024-11-30")}>Old</button>
           <button onClick={() => handleFilterChange("usual")}>Usual</button>
-          <button className="add-button">+</button>
         </div>
       </div>
       <div className="grid-container">
         {paginatedData.map((item) => (
           <div
             key={item.id}
-            className="grid-item"
+            className={`grid-item ${item.id === "add" ? "add-item" : ""}`}
             onClick={() => handleImageClick(item.id)}
           >
             <img src={item.image} alt={item.name} />

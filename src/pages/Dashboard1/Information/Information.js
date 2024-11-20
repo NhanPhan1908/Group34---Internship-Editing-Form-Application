@@ -32,13 +32,13 @@ function Information() {
 
   const navigate = useNavigate();
 
- 
+  // Hàm chuyển hướng khi click vào "View More"
   const handleViewMore = (section) => {
-    navigate(`/information/${section}-detail`);
+    navigate(`/dashboard/${section}-detail`);
   };
   
-
   
+
   const sections = [
     { title: "Thông tin sinh viên", data: info.student, section: "student" },
     { title: "Thông tin giám sát viên nội bộ", data: info.internalSupervisor, section: "internal" },

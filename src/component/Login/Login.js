@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Thư viện dùng để gửi yêu cầu HTTP
 import './Login.css';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('Student'); 
-  const navigate = useNavigate();
+  const [username, setUsername] = useState(''); // Lưu giá trị nhập vào username
+  const [password, setPassword] = useState(''); // Lưu giá trị nhập vào password
+  const [role, setRole] = useState('Student'); // Lưu giá trị nhập vào role
+  const navigate = useNavigate(); // Dùng để chuyển hướng sang trang khác sau khi đăng nhập thành công
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email, password, role);  
+  const handleSubmit = async (e) => {
+    e.preventDefault();  // Ngừng hành động mặc định của form (không reload trang)
 
-    if (email && password && role) 
-      navigate('/dashboard'); 
+    if (username && password && role) {
+      try {
+        // Gửi yêu cầu đăng nhập tới backend
+        const response = await axios.post('http://localhost:5000/login', {
+          username,
+          password,
+          role
+        });
+
+        if (response.status === 200) {
+          const data = response.data;
+          // Lưu token vào localStorage
+          localStorage.setItem('token', data.token);
+          // Chuyển hướng đến Dashboard
+          navigate('/dashboard');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('Invalid credentials');
+      }
+    } else {
+      alert('Please fill in all fields');
+    }
   };
 
   return (
@@ -22,16 +43,15 @@ function Login() {
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="username">Username</label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
             />
           </div>
-          
           <div>
             <label htmlFor="role">Role</label>
             <select
@@ -44,7 +64,6 @@ function Login() {
               <option value="Admin">Admin</option>
             </select>
           </div>
-
           <div>
             <label htmlFor="password">Password</label>
             <input
@@ -55,7 +74,6 @@ function Login() {
               placeholder="Enter your password"
             />
           </div>
-
           <button type="submit">Login</button>
         </form>
         <button onClick={() => navigate('/signup')} className="signup-button">Sign Up</button>
