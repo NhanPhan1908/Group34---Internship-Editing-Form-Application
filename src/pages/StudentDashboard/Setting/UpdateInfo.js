@@ -8,7 +8,7 @@ function UpdateInfo() {
     studentId: "",
     department: "",
     course: "",
-    email: "example@example.com", // Không thay đổi
+    email: "example@example.com",
     phone: "",
   });
 

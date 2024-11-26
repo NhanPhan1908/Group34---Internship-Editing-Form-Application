@@ -31,8 +31,7 @@ function StudentDetail() {
         </div>
       </div>
 
-      {/* Nếu bạn có thể thêm ảnh ở đây cho các tài liệu */}
-      {/* <img src="link-to-document-image" alt="Giấy tờ" /> */}
+      
     </div>
   );
 }

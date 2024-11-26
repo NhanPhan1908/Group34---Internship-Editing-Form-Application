@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Sidebar.css';
+import './SideBarStudent.css';
 
-function Sidebar() {
+function SideBarStudent() {
   const [activeYear, setActiveYear] = useState(null);
 
   const documents = {
@@ -52,7 +52,7 @@ function Sidebar() {
         ))}
       </div>
 
-      {/* Section for other documents */}
+      
       <div className="section">
         <h3>Giấy tờ khác</h3>
         {Object.keys(documents.other).map((year) => (
@@ -77,4 +77,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SideBarStudent;

@@ -56,7 +56,7 @@ function Document() {
 
   return (
     <div className="document-container">
-      {/* Search and Filter */}
+      
       <div className="document-header">
         <input
           type="text"
@@ -82,7 +82,7 @@ function Document() {
           )}
         </div>
 
-        {/* Type Filter Button */}
+        
         <div className="filter-dropdown">
           <button
             className="filter-button"
@@ -101,12 +101,12 @@ function Document() {
           )}
         </div>
 
-        {/* Reset Button */}
+        
         <button
           className="reset-button"
           onClick={() => {
             setFilters({ sort: "", type: "" });
-            setSearchQuery(""); // Optionally clear search query as well
+            setSearchQuery(""); 
           }}
         >
           Reset

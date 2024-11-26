@@ -44,11 +44,12 @@ function WorkManager() {
 
   const handleImageClick = (id) => {
     if (id === "add") {
-      navigate("/create");
+      navigate("/create"); 
     } else {
-      navigate(`/edit/${id}`);
+      navigate(`/student-dashboard/edit/${id}`); 
     }
   };
+  
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
