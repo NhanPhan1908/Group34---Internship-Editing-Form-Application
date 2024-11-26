@@ -19,7 +19,6 @@ import CompanyDetail from "./pages/StudentDashboard/Information/CompanyDetail";
 import PreviewDocument from "./pages/StudentDashboard/PreviewDocument/PreviewDocument";
 import Information from "./pages/StudentDashboard/Information/Information";
 import Setting from "./pages/StudentDashboard/Setting/Setting";
-import UserManager from "./pages/AdminDashboard/ManagerUser/UserManager";
 
 function App() {
   console.log(MainLayout)
@@ -28,9 +27,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-
-
-        
         <Route path="/student-dashboard" element={<MainLayout role="Student" />}>
           <Route index element={<DashboardStudent />} />
           <Route path="home" element={<DashboardStudent />} />
