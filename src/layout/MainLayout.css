@@ -63,3 +63,8 @@
   text-align: center;
   padding: 20px;
 }
+
+.stats-table th, tr, td{
+  border: 2px solid rgb(0, 0, 0);
+  padding: 10px;
+}

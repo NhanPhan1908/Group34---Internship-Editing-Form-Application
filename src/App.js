@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./component/Login/Login";
 import SignUp from "./component/Signup/Signup";
 import MainLayout from "./layout/MainLayout"; 
+
 import DashboardStudent from "./pages/StudentDashboard/DashboardStudent/Dashboard";
 import DashboardAdmin from "./pages/AdminDashboard/DashboardAdmin/DashboardAdmin";
 import Document from "./pages/StudentDashboard/Document/Document";
 import DocumentEditAdmin from "./pages/AdminDashboard/DashboardAdmin/DocumentEditAdmin";
 import WorkManagerAdmin from "./pages/AdminDashboard/DashboardAdmin/WorkManagerAdmin";
-import ManagerUser from "./pages/AdminDashboard/ManagerUser/UserManager";
+import UserManager from "./pages/AdminDashboard/ManagerUser/UserManager";
 import Statistic from "./pages/AdminDashboard/Statistic/Statistic";
 import UpdateInfo from "./pages/StudentDashboard/Setting/UpdateInfo";
 import StudentDetail from "./pages/StudentDashboard/Information/StudentDetail";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
 
+
         
         <Route path="/student-dashboard" element={<MainLayout role="Student" />}>
           <Route index element={<DashboardStudent />} />
@@ -41,6 +43,7 @@ function App() {
           <Route path="external-detail" element={<ExternalSupervisorDetail />} />
           <Route path="internal-detail" element={<InternalSupervisorDetail />} />
           <Route path="company-detail" element={<CompanyDetail />} />
+
         
         </Route>
         
