@@ -14,15 +14,14 @@ import StudentDetail from "./pages/Dashboard1/Information/StudentDetail";
 import CompanyDetail from "./pages/Dashboard1/Information/CompanyDetail";
 import InternalSupervisorDetail from "./pages/Dashboard1/Information/InternalSupervisorDetail";
 import PreviewDocument from "./pages/Dashboard1/PreviewDocument/PreviewDocument";
+import Statistics from "./pages/Dashboard1/Statistics/Statistics"; // Import Statistics
 
 function App() {
   return (
     <Router>
       <Routes>
-       
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-
      
         <Route path="/dashboard" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
@@ -31,18 +30,14 @@ function App() {
           <Route path="information" element={<Information />} />
           <Route path="setting" element={<Setting />} />
           <Route path="setting/update-info" element={<UpdateInfo />} />
-
           <Route path="student-detail" element={<StudentDetail />} />
           <Route path="external-detail" element={<ExternalSupervisorDetail />} />
           <Route path="internal-detail" element={<InternalSupervisorDetail />} />
           <Route path="company-detail" element={<CompanyDetail />} />
-
-          
           <Route path="previewdocument" element={<PreviewDocument />} />
-          
+          <Route path="statistics" element={<Statistics />} /> {/* New Statistics Route */}
         </Route>
 
-        
         <Route path="/edit/:id" element={<DocumentEdit />} />
       </Routes>
     </Router>
