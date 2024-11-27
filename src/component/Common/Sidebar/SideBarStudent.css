@@ -1,47 +1,40 @@
-.sidebar-admin {
+.sidebar-student {
   width: 250px;
   background-color: #1976D2; 
   padding: 20px;
   box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar-admin .section h3 {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #ffffff; 
-}
-
-.sidebar-admin .sidebar-item {
+.sidebar-student .sidebar-item {
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 4px;
   background-color: #1565C0; 
-  color: #ffffff; 
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
-.sidebar-admin .sidebar-item:hover {
-  background-color: #1E88E5; 
+.sidebar-student .sidebar-item:hover {
+  background-color: #404dbe; 
 }
 
-.sidebar-admin .sidebar-item.active {
-  background-color: #42A5F5; 
+.sidebar-student .sidebar-item.active {
+  background-color: #383ac4; 
   color: #ffffff;
 }
 
-.sidebar-admin .submenu {
+.sidebar-student .submenu {
   padding-left: 20px;
   margin-top: 5px;
 }
 
-.sidebar-admin .submenu a {
+.sidebar-student .submenu a {
   display: block;
   padding: 5px 0;
   text-decoration: none;
-  color: #ffffff; 
+  color: #ffffff;
 }
 
-.sidebar-admin .submenu a:hover {
-  background-color: #64B5F6; 
+.sidebar-student .submenu a:hover {
+  background-color: #81C784; 
 }

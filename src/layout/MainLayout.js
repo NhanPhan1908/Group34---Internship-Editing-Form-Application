@@ -7,8 +7,7 @@ import SideBarStudent from '../component/Common/Sidebar/SideBarStudent';
 import "./MainLayout.css"
 
 function MainLayout({ role }) {
-  console.log('Role received in MainLayout:', role);
-  console.log(TopNavAdmin, TopNavStudent, SideBarAdmin, SideBarStudent);
+  
 
   if (!role) {
     return <div className="unauthorized">Unauthorized: Role not specified.</div>;

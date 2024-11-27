@@ -3,76 +3,55 @@ import { Link } from 'react-router-dom';
 import './SideBarStudent.css';
 
 function SideBarStudent() {
-  const [activeYear, setActiveYear] = useState(null);
+  const [activeSection, setActiveSection] = useState(null);
 
-  const documents = {
-    active: {
-      "2019": ["Proposal", "Giấy xác nhận thực tập", "Hợp đồng với supervisor", "Hợp đồng với công ty"],
-      "2020": ["Proposal", "Giấy xác nhận thực tập", "Hợp đồng với supervisor", "Hợp đồng với công ty"],
-      "2021": ["Proposal", "Giấy xác nhận thực tập", "Hợp đồng với supervisor", "Hợp đồng với công ty"],
-      "2022": ["Proposal", "Giấy xác nhận thực tập", "Hợp đồng với supervisor", "Hợp đồng với công ty"],
-      "2023": ["Proposal", "Giấy xác nhận thực tập", "Hợp đồng với supervisor", "Hợp đồng với công ty"],
-      "2024": ["Proposal", "Giấy xác nhận thực tập", "Hợp đồng với supervisor", "Hợp đồng với công ty"]
+  const studentSections = {
+    dashboard: {
+      label: "Dashboard",
+      links: [
+        { path: "/student-dashboard/overview", label: "Overview" },
+        { path: "/student-dashboard/progress", label: "Progress" },
+      ]
     },
-    other: {
-      "2019": ["Other document 1", "Other document 2"],
-      "2020": ["Other document 1", "Other document 2"],
-      "2021": ["Other document 1", "Other document 2"],
-      "2022": ["Other document 1", "Other document 2"],
-      "2023": ["Other document 1", "Other document 2"],
-      "2024": ["Other document 1", "Other document 2"]
+    documents: {
+      label: "Documents",
+      links: [
+        { path: "/student-dashboard/document-manager", label: "Document Manager" },
+        { path: "/student-dashboard/upload", label: "Upload Documents" },
+      ]
+    },
+    profile: {
+      label: "Profile",
+      links: [
+        { path: "/student-dashboard/personal-info", label: "Personal Info" },
+        { path: "/student-dashboard/settings", label: "Settings" },
+      ]
     }
   };
 
-  const toggleYear = (year) => {
-    setActiveYear(activeYear === year ? null : year);
+  const toggleSection = (section) => {
+    setActiveSection(activeSection === section ? null : section);
   };
 
   return (
-    <div className="sidebar">
-      
-      <div className="section">
-        <h3>Giấy tờ đang hoạt động</h3>
-        {Object.keys(documents.active).map((year) => (
-          <div key={year}>
-            <div
-              className={`sidebar-item ${activeYear === year ? 'active' : ''}`}
-              onClick={() => toggleYear(year)}
-            >
-              <span>{year}</span>
-            </div>
-            {activeYear === year && (
-              <div className="submenu">
-                {documents.active[year].map((doc) => (
-                  <Link to={`/documents/${year}/${doc}`} key={doc}>{doc}</Link>
-                ))}
-              </div>
-            )}
+    <div className="sidebar-student">
+      {Object.keys(studentSections).map((section) => (
+        <div key={section}>
+          <div
+            className={`sidebar-item ${activeSection === section ? 'active' : ''}`}
+            onClick={() => toggleSection(section)}
+          >
+            <span>{studentSections[section].label}</span>
           </div>
-        ))}
-      </div>
-
-      
-      <div className="section">
-        <h3>Giấy tờ khác</h3>
-        {Object.keys(documents.other).map((year) => (
-          <div key={year}>
-            <div
-              className={`sidebar-item ${activeYear === year ? 'active' : ''}`}
-              onClick={() => toggleYear(year)}
-            >
-              <span>{year}</span>
+          {activeSection === section && (
+            <div className="submenu">
+              {studentSections[section].links.map((link) => (
+                <Link to={link.path} key={link.label}>{link.label}</Link>
+              ))}
             </div>
-            {activeYear === year && (
-              <div className="submenu">
-                {documents.other[year].map((doc) => (
-                  <Link to={`/documents/${year}/${doc}`} key={doc}>{doc}</Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 }

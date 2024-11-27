@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import "./DocumentEdit.css";
-import TopNavAdmin from "../component/Common/TopNav/TopNavAdmin"; 
-import SideBarAdmin from "../component/Common/Sidebar/SideBarAdmin"; 
 
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
+pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.js';
 
 function DocumentEdit() {
   const [file, setFile] = useState(null);
@@ -44,9 +43,9 @@ function DocumentEdit() {
 
   return (
     <div className="document-edit">
-      <TopNavAdmin /> 
+      
       <div className="main-content">
-        <SideBarAdmin /> 
+        
 
         
         <div className="content">

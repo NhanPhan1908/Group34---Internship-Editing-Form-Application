@@ -46,7 +46,7 @@ function WorkManager() {
     if (id === "add") {
       navigate("/create"); 
     } else {
-      navigate(`/student-dashboard/edit/${id}`); 
+      navigate(`/student-dashboard/document-edit/${id}`); 
     }
   };
   

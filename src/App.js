@@ -20,7 +20,8 @@ import PreviewDocument from "./pages/StudentDashboard/PreviewDocument/PreviewDoc
 import Information from "./pages/StudentDashboard/Information/Information";
 import Setting from "./pages/StudentDashboard/Setting/Setting";
 import StatisticsPage from "./pages/AdminDashboard/ManagerUser/StatisticsPage";
-import PreviewPage from "./pages/AdminDashboard/ManagerUser/PreviewPage";
+import PreviewPage from "./pages/AdminDashboard/ManagerUser/Preview";
+import DocumentEdit from "./pages/StudentDashboard/DashboardStudent/DocumentEdit";
 
 function App() {
   console.log(MainLayout)
@@ -32,6 +33,7 @@ function App() {
         <Route path="/student-dashboard" element={<MainLayout role="Student" />}>
           <Route index element={<DashboardStudent />} />
           <Route path="home" element={<DashboardStudent />} />
+          <Route path="/student-dashboard/document-edit/:id" element={<DocumentEdit />} />
           <Route path="document" element={<Document />} />
           <Route path="previewdocument" element={<PreviewDocument />} />
           <Route path="information" element={<Information />} />
