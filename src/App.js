@@ -19,6 +19,8 @@ import CompanyDetail from "./pages/StudentDashboard/Information/CompanyDetail";
 import PreviewDocument from "./pages/StudentDashboard/PreviewDocument/PreviewDocument";
 import Information from "./pages/StudentDashboard/Information/Information";
 import Setting from "./pages/StudentDashboard/Setting/Setting";
+import StatisticsPage from "./pages/AdminDashboard/ManagerUser/StatisticsPage";
+import PreviewPage from "./pages/AdminDashboard/ManagerUser/PreviewPage";
 
 function App() {
   console.log(MainLayout)
@@ -51,6 +53,8 @@ function App() {
           <Route path="document" element={<DocumentEditAdmin />} />
           <Route path="work-manager" element={<WorkManagerAdmin />} />
           <Route path="manager-user" element={<UserManager />} />
+          <Route path="manager-user/statistics-page" element={<StatisticsPage />} />
+          <Route path="manager-user/preview-page" element={<PreviewPage />} />
           <Route path="statistic" element={<Statistic />} />
         </Route>
 

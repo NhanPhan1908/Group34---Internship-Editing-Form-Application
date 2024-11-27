@@ -1,10 +1,8 @@
-
 .user-manager-container {
     padding: 20px;
     background-color: #f9f9f9;
     font-family: Arial, sans-serif;
 }
-
 
 .tab-container {
     display: flex;
@@ -31,22 +29,39 @@
     background-color: #0056b3;
 }
 
-
 .user-header {
     display: flex;
     flex-wrap: nowrap; 
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
     gap: 10px; 
 }
 
+.add-button {
+    padding: 10px 20px;
+    margin-left: 300px;
+    border: none;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #0056b3;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.add-button:hover {
+    background-color: #218838;
+}
+
 .search-input {
-    flex: 0.68;
+    flex: 1;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-    min-width: 200px;
+    
     box-sizing: border-box;
     height: 30px;
 }
@@ -69,7 +84,6 @@
     color: black;
     min-width: 120px; 
 }
-
 
 .student-table, .supervisor-table {
     overflow-x: auto; 
@@ -97,12 +111,9 @@ table th {
     font-weight: bold;
 }
 
-
-
 button:hover {
     opacity: 0.9;
 }
-
 
 @media (max-width: 768px) {
     .user-header {
@@ -119,4 +130,102 @@ button:hover {
     .search-input {
         width: 50%;
     }
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0; 
+    width: 300px;
+    height: 100%;
+    background-color: #f9f9f9;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); 
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: transform 1s ease-in-out;
+    transform: translateX(460%); 
+}
+
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.sidebar form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.sidebar form input,
+.sidebar form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+
+.sidebar.active {
+    transform: translateX(0); 
+}
+/* Định dạng cho các nút Thống kê và Preview */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end; /* Đặt các nút ở phía bên phải */
+    gap: 20px; /* Khoảng cách giữa các nút */
+    margin-top: 20px; /* Khoảng cách từ bảng đến các nút */
+}
+
+.action-button {
+    width: 100px; /* Chiều rộng của nút */
+    height: 100px; /* Chiều cao của nút */
+    background-color: #007BFF; /* Màu nền nút */
+    color: white; /* Màu chữ */
+    border: none;
+    border-radius: 8px; /* Hình vuông với góc bo tròn */
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Căn chữ giữa nút */
+    text-align: center;
+}
+
+.action-button:hover {
+    background-color: #0056b3; /* Màu khi hover */
 }
