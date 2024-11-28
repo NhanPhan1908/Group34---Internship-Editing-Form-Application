@@ -90,11 +90,11 @@ function UserManager() {
   const navigate = useNavigate(); 
 
   const handleStatisticClick = () => {
-    navigate('/manager-user/statistics-page'); 
+    navigate('/admin-dashboard/statistics-page'); 
   };
 
   const handlePreviewClick = () => {
-    navigate('/manager-user/preview-page'); 
+    navigate('/admin-dashboard/preview-page'); 
   };
 
   return (
