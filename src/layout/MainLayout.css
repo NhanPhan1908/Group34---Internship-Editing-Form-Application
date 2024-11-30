@@ -24,25 +24,12 @@
   flex: 1;
   overflow: auto;
   padding: 20px;
-  margin-left: 0px; 
-  padding-left: 60px;
   padding-right: 60px;
   background-color: #f4f6f9; 
-  height: calc(100vh - 68px); 
+  height: 100%; 
   position: relative;
+  border-radius: 8px;
 }
 
-.stats-table th, .stats-table td, .stats-table tr {
-  border: 2px solid rgb(0, 0, 0);
-  padding: 10px;
-  text-align: left;
-}
-
-
-.unauthorized {
-  color: red;
-  text-align: center;
-  padding: 20px;
-}
 
 

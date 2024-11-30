@@ -1,155 +1,80 @@
-.top-actions {
+.body{
+  overflow: hidden;
+}
+.work-manager-layout {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 0px;
+}
+
+/* Main Content */
+.work-manager-container {
+  flex: 1;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.time-management-sidebar {
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #11bcff;
+  border-left: 1px solid #1e9cd6;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.time-management-sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.calendar-container {
   margin-bottom: 20px;
 }
 
-.search-bar {
-  flex: 1;
-  display: flex;
+.task-list h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-.search-bar input {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.task-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.filter-actions {
-  display: inline-flex;
-  gap: 5px;
-}
-
-.filter-actions button {
-  height: 36px;
-  padding: 8px 16px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: -15px;
-}
-
-.filter-actions .add-button {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  background-color: #007BFF;
-  border-radius: 4px;
-  
-}
-
-.filter-actions button:hover {
-  opacity: 0.8;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  margin-top: 20px;
-  padding: 10px 0;
-}
-
-.pagination button {
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  color: #007BFF;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.pagination button.number {
-  width: 24px;
-}
-
-.pagination button.previous,
-.pagination button.next {
-  padding: 0 10px;
-  width: 60px;
-}
-
-.pagination button:hover {
-  background-color: #007BFF;
-  color: white;
-}
-
-.pagination .active {
-  background-color: #007BFF;
-  color: white;
-  border-color: #007BFF;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+.task-list li {
   padding: 10px;
-  
-}
-
-.grid-item {
+  border: 1px solid #1b9fb6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #fff;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  transition: transform 0.2s;
-  height: 200px; 
-  width: 150px; 
 }
 
-.grid-item:hover {
-  transform: translateY(-5px);
-}
-
-.grid-item img {
-  width: 100%;
-  height: 200px; 
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px; 
-}
-
-.file-name {
+.task-title {
   font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  margin-bottom: 8px;
 }
 
-.update-date {
-  color: #888;
+.task-deadline {
   font-size: 14px;
-  text-align: center;
+  color: #888;
 }
 
-.add-item {
-  cursor: pointer;
-  background-color: #f0f8ff;
-  border: 2px dashed #007bff;
-  text-align: center;
+/* Calendar Styles */
+.react-calendar {
+  width: 100%;
+  border: none;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
 }
-.add-item img {
-  opacity: 0.6;
-}
-.add-item:hover img {
-  opacity: 1;
+
+.react-calendar__tile--active {
+  background-color: #00aaff !important;
+  color: white !important;
 }

@@ -24,10 +24,10 @@
   
   .chart-container {
     position: relative;
-    height: 300px; /* Đảm bảo biểu đồ có chiều cao phù hợp */
-    background-color: #f0f0f0; /* Màu nền nhẹ cho biểu đồ */
-    border-radius: 10px; /* Bo góc cho biểu đồ */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng nhẹ */
+    height: 300px; 
+    background-color: #f0f0f0; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     margin: 10px;
     padding: 20px;
     display: flex;
@@ -38,8 +38,8 @@
   
   .statistic-charts {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 cột */
-    grid-gap: 70px; /* Khoảng cách giữa các biểu đồ */
+    grid-template-columns: repeat(2, 1fr); 
+    grid-gap: 70px; 
   }
   
   .statistic-charts .chart-container {
@@ -47,7 +47,7 @@
     height: 200px;
     max-width: 300px;
     margin: 0 auto;
-    background-color: #fafafa; /* Màu nền biểu đồ */
+    background-color: #fafafa; 
   }
   
   .chart-title {
