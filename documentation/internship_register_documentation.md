@@ -63,4 +63,18 @@ Stores information about companies offering internship opportunities.
 | phone_number | VARCHAR(20)| Contact number of the company.         |
 | user_id      | INT        | FK to `users` table (user information). |
 
+## Relationships Between Tables
+The following relationships exist between the tables:
 
+- **Users** table has a **one-to-one** relationship with the **students**, **internal_supervisors**, **external_supervisors**, and **companies** tables.
+  - The `user_id` in each of these tables references the `id` of the `users` table as a foreign key.
+
+### Key Relationships:
+- A **student** belongs to a **user** (through `user_id`).
+- An **internal supervisor** belongs to a **user** (through `user_id`).
+- An **external supervisor** belongs to a **user** (through `user_id`).
+- A **company** belongs to a **user** (through `user_id`).
+
+
+![ERD Diagram][def]
+[def]: erd.drawio.png
