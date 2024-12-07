@@ -25,6 +25,7 @@ import DocumentEdit from "./pages/StudentDashboard/DashboardStudent/DocumentEdit
 import UserManagerStudent from "./pages/AdminDashboard/ManagerUser/UserManagerStudent";
 import UserManagerSupervisor from "./pages/AdminDashboard/ManagerUser/UserManagerSupervisor";
 import AdminSetting from "./pages/AdminDashboard/Setting/AdminSetting";
+import FormManager from "./pages/AdminDashboard/FormManager/FormManager";
 function App() {
   console.log(MainLayout)
   return (
@@ -62,6 +63,7 @@ function App() {
           <Route path="statistics-page" element={<StatisticsPage />} />
           <Route path="preview-page" element={<PreviewPage />} />
           <Route path="settings" element={<AdminSetting />} />
+          <Route path="/admin-dashboard/form-manager" element={<FormManager />} />
 
         </Route>
 
