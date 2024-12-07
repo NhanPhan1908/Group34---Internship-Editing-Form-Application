@@ -13,7 +13,6 @@ function CompanyDetail() {
       <h3>Giấy tờ liên quan</h3>
       <div className="document-container">
         <div className="document">
-          {/* Đảm bảo đường dẫn đúng với route con dưới /dashboard */}
           <Link to="/dashboard/previewdocument/document1">
             <img src="https://via.placeholder.com/250x170?text=Document1" alt="Giấy tờ 1" />
             <p>Giấy tờ 1</p>

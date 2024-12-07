@@ -28,8 +28,6 @@ function Setting() {
   return (
     <div className="setting-container">
       <h1>Cài đặt</h1>
-
-      {/* Thông tin người dùng */}
       <div className="user-info">
         <div className="avatar-container">
           <img src={userInfo.avatar} alt="Avatar" className="avatar" />
@@ -42,13 +40,13 @@ function Setting() {
           <p><strong>Ngành:</strong> {userInfo.course}</p>
           <p><strong>Email:</strong> {userInfo.email}</p>
           <p><strong>Số điện thoại:</strong> {userInfo.phone}</p>
-          <button onClick={() => navigate("/dashboard/setting/update-info")}>
+          <button onClick={() => navigate("/student-dashboard/setting/update-info")}>
             Cập nhật thông tin
           </button>
         </div>
       </div>
 
-      {/* Cài đặt hệ thống */}
+      
       <div className="system-settings">
         <div className="setting-item">
           <button onClick={toggleSettings}>Cài đặt</button>
