@@ -42,7 +42,7 @@ function WorkManagerAdmin() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const renderFileCard = (file) => (
-    <div key={file.id} className="grid-item" onClick={() => navigate(`/edit/${file.id}`)}>
+    <div key={file.id} className="grid-item" onClick={() => navigate(`document-edit-admin/${file.id}`)}>
       <img src={file.image} alt={file.name} />
       <div className="file-name">{file.name}</div>
       <div className="update-date">{file.date}</div>
