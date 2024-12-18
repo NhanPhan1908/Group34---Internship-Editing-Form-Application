@@ -9,6 +9,7 @@ import Document from "./pages/StudentDashboard/Document/Document";
 import DocumentEditAdmin from "./pages/AdminDashboard/DashboardAdmin/DocumentEditAdmin";
 import WorkManagerAdmin from "./pages/AdminDashboard/DashboardAdmin/WorkManagerAdmin";
 import UserManager from "./pages/AdminDashboard/ManagerUser/UserManager";
+import AdminSetting from "./pages/AdminDashboard/Setting/AdminSetting";
 
 import UpdateInfo from "./pages/StudentDashboard/Setting/UpdateInfo";
 import StudentDetail from "./pages/StudentDashboard/Information/StudentDetail";
@@ -60,6 +61,7 @@ function App() {
           <Route path="user-manager-supervisor" element={<UserManagerSupervisor />} />
           <Route path="statistics-page" element={<StatisticsPage />} />
           <Route path="preview-page" element={<PreviewPage />} />
+          <Route path="adminsetting" element={<AdminSetting />} />
         </Route>
 
         

@@ -10,7 +10,18 @@ function UserManagerStudent() {
     { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
     { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
     { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
-    
+    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
+    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
+    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
+    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
+    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
+    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
+    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
+    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
+    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
+    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
+    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
+    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
   ];
 
   

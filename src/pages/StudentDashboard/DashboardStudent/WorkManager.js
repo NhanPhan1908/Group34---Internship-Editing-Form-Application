@@ -49,7 +49,6 @@ function WorkManager() {
       navigate(`/student-dashboard/document-edit/${id}`); 
     }
   };
-  
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
@@ -62,9 +61,9 @@ function WorkManager() {
   };
 
   return (
-    <div className="work-manager">
-      <div className="top-actions">
-        <div className="search-bar">
+    <div className="work-manager-container">
+      <div className="work-manager-top-actions">
+        <div className="work-manager-search-bar">
           <input
             type="text"
             placeholder="Search files..."
@@ -72,29 +71,29 @@ function WorkManager() {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="filter-actions">
+        <div className="work-manager-filter-actions">
           <button onClick={() => handleFilterChange("all")}>All</button>
           <button onClick={() => handleFilterChange("2024-11-01")}>New</button>
           <button onClick={() => handleFilterChange("2024-11-30")}>Old</button>
           <button onClick={() => handleFilterChange("usual")}>Usual</button>
         </div>
       </div>
-      <div className="grid-container">
+      <div className="work-manager-grid-container">
         {paginatedData.map((item) => (
           <div
             key={item.id}
-            className={`grid-item ${item.id === "add" ? "add-item" : ""}`}
+            className={`work-manager-grid-item ${item.id === "add" ? "work-manager-add-item" : ""}`}
             onClick={() => handleImageClick(item.id)}
           >
             <img src={item.image} alt={item.name} />
-            <div className="file-name">{item.name}</div>
-            <div className="update-date">{item.date}</div>
+            <div className="work-manager-file-name">{item.name}</div>
+            <div className="work-manager-update-date">{item.date}</div>
           </div>
         ))}
       </div>
-      <div className="pagination">
+      <div className="work-manager-pagination">
         <button
-          className="previous"
+          className="work-manager-previous"
           onClick={handlePrevious}
           disabled={currentPage === 1}
         >
@@ -103,14 +102,14 @@ function WorkManager() {
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
-            className={`number ${currentPage === index + 1 ? "active" : ""}`}
+            className={`work-manager-page-number ${currentPage === index + 1 ? "work-manager-active-page" : ""}`}
             onClick={() => handlePageClick(index + 1)}
           >
             {index + 1}
           </button>
         ))}
         <button
-          className="next"
+          className="work-manager-next"
           onClick={handleNext}
           disabled={currentPage === totalPages}
         >

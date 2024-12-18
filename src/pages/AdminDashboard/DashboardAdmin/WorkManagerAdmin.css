@@ -1,69 +1,75 @@
-.body{
-  overflow: hidden;
+/* General Body Overflow */
+body {
+  height: 3000px;
 }
-.work-manager-layout {
+
+/* Layout for the Admin Work Manager */
+.admin-work-manager-layout {
   display: flex;
   gap: 0px;
 }
 
 /* Main Content */
-.work-manager-container {
+.admin-work-manager-container {
   flex: 1;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
 /* Sidebar */
-.time-management-sidebar {
+.admin-time-management-sidebar {
   width: 300px;
   padding: 20px;
   border-radius: 8px;
-  background-color: #11bcff;
+  background-color: #023164;
   border-left: 1px solid #1e9cd6;
   font-family: Arial, sans-serif;
   overflow: hidden;
 }
 
-.time-management-sidebar h2 {
+.admin-time-management-sidebar h2 {
   font-size: 20px;
   margin-bottom: 20px;
-  border-bottom: 2px solid #ddd;
+  color: #fff;
+  border-bottom: 2px solid #1e9cd6;
   padding-bottom: 10px;
 }
 
-.calendar-container {
+.admin-calendar-container {
   margin-bottom: 20px;
 }
 
-.task-list h3 {
+.admin-task-list h3 {
   font-size: 18px;
+  color: #fff;
   margin-bottom: 10px;
 }
 
-.task-list ul {
+.admin-task-list ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.task-list li {
+.admin-task-item {
   padding: 10px;
-  border: 1px solid #1b9fb6;
+  border: 1px solid #1e9cd6;
   border-radius: 5px;
   margin-bottom: 10px;
-  background-color: #fff;
+  background-color: #1e9cd6;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.task-title {
+.admin-task-title {
   font-weight: bold;
+  color: #fff;
 }
 
-.task-deadline {
+.admin-task-deadline {
   font-size: 14px;
-  color: #888;
+  color: #fff;
 }
 
 /* Calendar Styles */
@@ -77,4 +83,94 @@
 .react-calendar__tile--active {
   background-color: #00aaff !important;
   color: white !important;
+}
+
+/* Header and Buttons */
+.admin-top-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-search-bar {
+  flex: 1;
+}
+
+.admin-search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #1e9cd6;
+}
+
+.admin-filter-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-action-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.admin-action-button--all {
+  background-color: #023164;
+  border: 1px solid #023164;
+}
+
+.admin-action-button--new {
+  background-color: #023164;
+  border: 1px solid #023164;
+}
+
+.admin-action-button--old {
+  background-color: #023164;
+  border: 1px solid #023164;
+}
+
+/* File and Documentation Section */
+.admin-section {
+  margin-bottom: 30px;
+}
+
+.admin-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.admin-file-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.admin-file-card:hover {
+  transform: scale(1.05);
+}
+
+.admin-file-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.admin-file-name {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.admin-file-date {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Procedure Documentation Section */
+.admin-doc-section h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
 }

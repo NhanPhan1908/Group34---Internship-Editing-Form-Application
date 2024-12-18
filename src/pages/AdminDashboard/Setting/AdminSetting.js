@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AdminSetting.css";
 
-function Setting() {
+function AdminSetting() {
   const navigate = useNavigate();
 
   const [isSettingsOpen, setSettingsOpen] = useState(false);
@@ -73,4 +73,4 @@ function Setting() {
   );
 }
 
-export default Setting;
+export default AdminSetting;
