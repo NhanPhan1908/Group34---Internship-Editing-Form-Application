@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 
 function SignUp() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('Student');
   const [password, setPassword] = useState('');
@@ -21,10 +20,10 @@ function SignUp() {
     }
 
     
-    console.log('User signed up:', { firstName, lastName, email, role, password });
+    console.log('User signed up:', { username, email, role, password });
     alert('Sign up successful! Redirecting to the dashboard...');
 
-   
+    
     if (role === 'Student') {
       navigate('/student-dashboard');
     } else if (role === 'Supervisor') {
@@ -40,25 +39,13 @@ function SignUp() {
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="Enter your first name"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Enter your last name"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
               required
             />
           </div>
