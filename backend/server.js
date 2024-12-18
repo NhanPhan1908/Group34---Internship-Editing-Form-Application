@@ -1,13 +1,23 @@
 require('dotenv').config();
 const express = require('express');
-const app = express();
 const cors = require('cors');
+const app = express();
+
 app.use(express.json());
 
+// Cấu hình CORS
+app.use(cors({
+    origin: 'http://localhost:3001', // URL frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// Controllers và Middleware
 const { tokenController, logoutController, loginController } = require('./authController');
 const { createFormController, getFormByIdController, updateFormController, deleteFormController } = require('./formController');
 const authenticateToken = require('./authMiddleware');
 
+// Routes
 app.post('/token', tokenController);
 
 app.delete('/logout', logoutController);
@@ -15,8 +25,8 @@ app.delete('/logout', logoutController);
 app.post('/login', loginController);
 
 const posts = [
-    { username: 'Saul',password: 'saul123', title: 'Goodman' },
-    { username: 'Kim',password: 'kim456', title: 'Wexler' }
+    { username: 'Saul', password: 'saul123', title: 'Goodman' },
+    { username: 'Kim', password: 'kim456', title: 'Wexler' },
 ];
 
 app.get('/posts', authenticateToken, (req, res) => {
@@ -35,14 +45,8 @@ app.get('/', (req, res) => {
     res.json('Hello, World!');
 });
 
-const PORT = process.env.PORT || 5000;
+// Khởi động server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
-// Cấu hình CORS
-app.use(cors({
-    origin: 'http://localhost:3000/', // Chỉ cho phép frontend từ localhost:3000
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  }));

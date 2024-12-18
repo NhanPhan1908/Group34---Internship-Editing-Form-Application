@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const db = require('./db');
 const User = require("../backend/user");
+const bcrypt = require("bcrypt")
 
 let refreshTokens = [];
 
@@ -73,26 +74,20 @@ const loginController = async (req, res) => {
 
         const user = rows[0];
 
-        // Kiểm tra mật khẩu
-        const isMatch = await bcrypt.compare(password, user.password_hash);
-        if (!isMatch) {
+        // Kiểm tra mật khẩu dạng plaintext
+        if (password !== user.password) {
             return res.status(401).json({ message: 'Mật khẩu không chính xác' });
         }
 
-        // Tạo Access Token và Refresh Token
+        // Tạo token cho người dùng
         const accessToken = generateAccessToken({ userId: user.user_id, username: user.username, role: user.role });
-        const refreshToken = jwt.sign({ userId: user.user_id, username: user.username, role: user.role }, process.env.REFRESH_TOKEN_SECRET);
-
-        // Lưu Refresh Token vào danh sách hoặc cơ sở dữ liệu (nếu cần)
-        refreshTokens.push(refreshToken);
-
-        // Trả về token cho client
-        res.json({ accessToken, refreshToken });
+        res.json({ accessToken });
     } catch (error) {
         console.error('Lỗi khi xử lý đăng nhập:', error);
         res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 };
+
 
 module.exports = {
     tokenController,

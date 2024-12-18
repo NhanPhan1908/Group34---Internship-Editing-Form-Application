@@ -15,10 +15,10 @@ function Login() {
     if (username && password && role) {
       try {
         // Gửi yêu cầu đăng nhập tới backend
-        const response = await axios.post('https://groupproject34.vercel.app/login', {
+        const response = await axios.post('http://localhost:3000/login', {
           username,
           password,
-          role
+          role  
         });
 
         if (response.status === 200) {

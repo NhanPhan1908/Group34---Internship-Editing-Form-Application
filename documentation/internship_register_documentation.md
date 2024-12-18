@@ -21,9 +21,9 @@ Contains information about students who are registering for internships.
 | date_of_birth| DATE       | Birthdate of the student.               |
 | student_id   | VARCHAR(20)| Unique student ID.                      |
 | major        | VARCHAR(100)| Major or course of study.              |
-| school_year  | INT        | Year of study (e.g., 1, 2, 3, 4).        |
+| school_year  | INT        | Year of study (e.g., 1, 2, 3, 4).       |
 | email        | VARCHAR(100)| Email address of the student.          |
-| phone_number | VARCHAR(20)| Contact number of the student.         |
+| phone_number | VARCHAR(20)| Contact number of the student.          |
 | user_id      | INT        | FK to `users` table (user information). |
 
 ### 3. `internal_supervisors` Table
@@ -35,7 +35,7 @@ Stores information about internal supervisors who are guiding students during th
 | name         | VARCHAR(100)| Name of the supervisor.                |
 | work_unit    | VARCHAR(100)| Department or unit the supervisor belongs to. |
 | email        | VARCHAR(100)| Email address of the supervisor.       |
-| phone_number | VARCHAR(20)| Contact number of the supervisor.      |
+| phone_number | VARCHAR(20)| Contact number of the supervisor.       |
 | user_id      | INT        | FK to `users` table (user information). |
 
 ### 4. `external_supervisors` Table
@@ -48,7 +48,7 @@ Stores information about external supervisors who are guiding students during th
 | work_unit    | VARCHAR(100)| Company or organization the supervisor works for. |
 | position     | VARCHAR(100)| Position of the external supervisor.   |
 | email        | VARCHAR(100)| Email address of the supervisor.       |
-| phone_number | VARCHAR(20)| Contact number of the supervisor.      |
+| phone_number | VARCHAR(20)| Contact number of the supervisor.       |
 | user_id      | INT        | FK to `users` table (user information). |
 
 ### 5. `companies` Table
@@ -60,7 +60,7 @@ Stores information about companies offering internship opportunities.
 | name         | VARCHAR(100)| Name of the company.                   |
 | address      | VARCHAR(255)| Address of the company.                |
 | email        | VARCHAR(100)| Email address of the company.          |
-| phone_number | VARCHAR(20)| Contact number of the company.         |
+| phone_number | VARCHAR(20)| Contact number of the company.          |
 | user_id      | INT        | FK to `users` table (user information). |
 
 ## Relationships Between Tables
