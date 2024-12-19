@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import axios from "axios";  // Thêm axios để thực hiện các yêu cầu HTTP
 import "./UpdateInfo.css";
 
 function UpdateInfo() {
   const [formData, setFormData] = useState({
-    name: "John Doe", 
+    name: "John Doe",
     dob: "",
     studentId: "",
     department: "",
@@ -12,20 +13,38 @@ function UpdateInfo() {
     phone: "",
   });
 
+  const [loading, setLoading] = useState(false);  // Thêm state loading để theo dõi quá trình gửi dữ liệu
+  const [error, setError] = useState("");  // Thêm state error để hiển thị thông báo lỗi nếu có
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Thông tin cập nhật:", formData);
-    alert("Cập nhật thành công!");
+    setLoading(true);  // Bắt đầu trạng thái loading khi gửi form
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/updateInfo", formData);
+      
+      if (response.status === 200) {
+        alert("Cập nhật thành công!");
+      } else {
+        setError("Đã có lỗi xảy ra. Vui lòng thử lại!");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Đã có lỗi xảy ra. Vui lòng thử lại!");
+    } finally {
+      setLoading(false);  // Kết thúc trạng thái loading
+    }
   };
 
   return (
     <div className="update-info-container">
       <h1>Cập nhật thông tin</h1>
+      {error && <p className="error">{error}</p>} {/* Hiển thị thông báo lỗi nếu có */}
       <form onSubmit={handleSubmit}>
         <label>Họ và Tên</label>
         <input
@@ -78,7 +97,9 @@ function UpdateInfo() {
           onChange={handleChange}
         />
 
-        <button type="submit">Lưu thông tin</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Đang lưu..." : "Lưu thông tin"}
+        </button>
       </form>
     </div>
   );

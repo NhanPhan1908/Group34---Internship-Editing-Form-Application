@@ -1,29 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Setting.css";
 
 function Setting() {
   const navigate = useNavigate();
-
-  // Thông tin người dùng cập nhật
-  const userInfo = {
-    name: "Phan Đăng Nhân",
-    dob: "19/08/2003",
-    studentId: "BI12-336",
-    department: "Công nghệ thông tin",
-    course: "Công nghệ thông tin và truyền thông",
-    email: "nhandangphan1908@gmail.com",
-    phone: "0353473186",
-    avatar: "https://via.placeholder.com/150", 
-  };
-
+  const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const [isHelpOpen, setHelpOpen] = useState(false);
   const [isScreenOpen, setScreenOpen] = useState(false);
 
+  const userId = "123"; 
+
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
+        setUserInfo(response.data);
+      } catch (err) {
+        setError("Không thể tải thông tin người dùng.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserInfo();
+  }, [userId]);
+
   const toggleSettings = () => setSettingsOpen(!isSettingsOpen);
   const toggleHelp = () => setHelpOpen(!isHelpOpen);
   const toggleScreen = () => setScreenOpen(!isScreenOpen);
+
+  if (loading) return <div>Đang tải thông tin...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="setting-container">
@@ -46,7 +58,6 @@ function Setting() {
         </div>
       </div>
 
-      
       <div className="system-settings">
         <div className="setting-item">
           <button onClick={toggleSettings}>Cài đặt</button>
