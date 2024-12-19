@@ -5,26 +5,12 @@ import "./UserManagerStudent.css";
 function UserManagerStudent() {
   const navigate = useNavigate();
 
-  
   const dummyData = [
-    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
-    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
-    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
-    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
-    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
-    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
-    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
-    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
-    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
-    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
-    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
-    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
-    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI" },
-    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics" },
-    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems" },
+    { id: 1, name: "Nguyen A", dob: "2000-01-01", major: "Computer Science", unit: "Company", year: "2020", location: "Hanoi", phone: "0123456789", topic: "AI", valid: "valid" },
+    { id: 2, name: "Tran B", dob: "1999-02-02", major: "Mechanical Engineering", unit: "Lab", year: "2021", location: "HCM", phone: "0987654321", topic: "Robotics", valid: "valid" },
+    { id: 3, name: "Le C", dob: "1998-03-03", major: "Electrical Engineering", unit: "Company", year: "2020", location: "Hanoi", phone: "0112233445", topic: "Power Systems", valid: "valid" },
   ];
 
-  
   const [filters, setFilters] = useState({
     name: "",
     major: "",
@@ -33,12 +19,12 @@ function UserManagerStudent() {
     location: "",
     phone: "",
     topic: "",
+    valid: "",
   });
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  
   const filteredData = dummyData.filter((student) => {
     return (
       student.name.toLowerCase().includes(filters.name.toLowerCase()) &&
@@ -69,26 +55,17 @@ function UserManagerStudent() {
     setCurrentPage(page);
   };
 
-  const handleEditClick = (id) => {
-    navigate(`/edit/${id}`);
-  };
-
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,
     }));
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
-
-  const handleNavigateToPreview = () => {
-    navigate("/admin-dashboard/preview-page");
-  };
-
-  const handleNavigateToStatistics = () => {
-    navigate("/admin-dashboard/statistics-page");
+  const handleRowClick = (student) => {
+    navigate(`/admin-dashboard/user-manager-student-detail/${student.id}`, { state: { student } });
   };
 
   return (
@@ -160,12 +137,16 @@ function UserManagerStudent() {
             <th>Location</th>
             <th>Phone</th>
             <th>Topic</th>
-            <th>Actions</th>
+            <th>Validation</th>
           </tr>
         </thead>
         <tbody>
           {paginatedData.map((student) => (
-            <tr key={student.id}>
+            <tr
+              key={student.id}
+              onClick={() => handleRowClick(student)}
+              className="clickable-row"
+            >
               <td>{student.name}</td>
               <td>{student.dob}</td>
               <td>{student.major}</td>
@@ -174,9 +155,7 @@ function UserManagerStudent() {
               <td>{student.location}</td>
               <td>{student.phone}</td>
               <td>{student.topic}</td>
-              <td>
-                <button onClick={() => handleEditClick(student.id)}>Edit</button>
-              </td>
+              <td>{student.valid}</td>
             </tr>
           ))}
         </tbody>
@@ -198,12 +177,6 @@ function UserManagerStudent() {
         <button onClick={handleNext} disabled={currentPage === totalPages}>
           Next
         </button>
-      </div>
-
-      
-      <div className="navigation-buttons">
-        <button onClick={handleNavigateToPreview}>Preview</button>
-        <button onClick={handleNavigateToStatistics}>Statistics</button>
       </div>
     </div>
   );

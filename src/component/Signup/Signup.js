@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Thêm axios để gửi yêu cầu HTTP
 import './Signup.css';
 
 function SignUp() {
@@ -10,26 +11,33 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
 
-    
-    console.log('User signed up:', { username, email, role, password });
-    alert('Sign up successful! Redirecting to the dashboard...');
+    try {
+      // Gửi yêu cầu đăng ký tới backend
+      const response = await axios.post('http://localhost:3000/register', {
+        username,
+        email,
+        role,
+        password,
+      });
 
-    
-    if (role === 'Student') {
-      navigate('/student-dashboard');
-    } else if (role === 'Supervisor') {
-      navigate('/supervisor-dashboard');
-    } else if (role === 'Admin') {
-      navigate('/admin-dashboard');
+      if (response.status === 201) { // Xử lý khi đăng ký thành công
+        alert('Sign up successful! Please log in with your new account.');
+        navigate('/student-dashboard/home'); // Điều hướng về trang Login
+      } else {
+        alert('Sign up failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Sign up error:', error);
+      alert(error.response?.data?.message || 'An error occurred during sign up.');
+      navigate('/student-dashboard/home'); 
     }
   };
 
@@ -70,8 +78,8 @@ function SignUp() {
               onChange={(e) => setRole(e.target.value)}
               required
             >
-              <option value="Supervisor">Supervisor</option>
               <option value="Student">Student</option>
+              <option value="Supervisor">Supervisor</option>
               <option value="Admin">Admin</option>
             </select>
           </div>
@@ -100,7 +108,7 @@ function SignUp() {
             />
           </div>
 
-          <button type="submit">Sign Up</button>
+          <button onClick={() => navigate('/signup')} type="submit">Sign Up</button>
         </form>
       </div>
     </div>

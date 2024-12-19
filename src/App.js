@@ -24,6 +24,7 @@ import PreviewPage from "./pages/AdminDashboard/ManagerUser/Preview";
 import DocumentEdit from "./pages/StudentDashboard/DashboardStudent/DocumentEdit";
 import UserManagerStudent from "./pages/AdminDashboard/ManagerUser/UserManagerStudent";
 import UserManagerSupervisor from "./pages/AdminDashboard/ManagerUser/UserManagerSupervisor";
+import UserManagerStudentDetail from "./pages/AdminDashboard/ManagerUser/UserManagerStudentDetail";
 
 function App() {
   return (
@@ -58,10 +59,12 @@ function App() {
           <Route path="manager-user" element={<UserManager />} />
           <Route path="/admin-dashboard/document-edit-admin/:id" element={<DocumentEditAdmin />} />
           <Route path="user-manager-student" element={<UserManagerStudent />} />
+          <Route path="admin-dashboard/user-manager-student-detail/:id" element={<UserManagerStudentDetail />} />
           <Route path="user-manager-supervisor" element={<UserManagerSupervisor />} />
           <Route path="statistics-page" element={<StatisticsPage />} />
           <Route path="preview-page" element={<PreviewPage />} />
           <Route path="adminsetting" element={<AdminSetting />} />
+
         </Route>
 
         

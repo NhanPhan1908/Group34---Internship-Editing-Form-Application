@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./UserManagerSupervisor.css";
 
 function UserManagerSupervisor() {
+  const navigate = useNavigate();
+
   const supervisors = [
     {
       id: 1,
@@ -25,6 +28,10 @@ function UserManagerSupervisor() {
       ],
     },
   ];
+
+  const handleRowClick = (supervisorId, studentId) => {
+    navigate(`/supervisor/${supervisorId}/student/${studentId}`);
+  };
 
   return (
     <div className="user-manager-supervisor">
@@ -56,7 +63,11 @@ function UserManagerSupervisor() {
               </thead>
               <tbody>
                 {supervisor.students.map((student, index) => (
-                  <tr key={index}>
+                  <tr
+                    key={index}
+                    onClick={() => handleRowClick(supervisor.id, student.studentId)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <td>{student.name}</td>
                     <td>{student.studentId}</td>
                     <td>{student.major}</td>
