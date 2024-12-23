@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Thêm axios để gửi yêu cầu HTTP
 import './Signup.css';
 
+
 function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -11,6 +12,30 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+
+    // Điều hướng dựa trên vai trò
+    switch (role) {
+      case 'Student':
+        navigate('/student-dashboard/home');
+        break;
+      case 'Supervisor':
+        navigate('/supervisor-dashboard/home');
+        break;
+      case 'Admin':
+        navigate('/admin-dashboard/home');
+        break;
+      default:
+        navigate('/');
+    }
+  };
+/*
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,7 +64,7 @@ function SignUp() {
       alert(error.response?.data?.message || 'An error occurred during sign up.');
       navigate('/student-dashboard/home'); 
     }
-  };
+  };*/
 
   return (
     <div className="signup-container">

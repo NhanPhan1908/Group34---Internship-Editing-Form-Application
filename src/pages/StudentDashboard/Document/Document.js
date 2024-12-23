@@ -1,6 +1,28 @@
 import React, { useState } from 'react';
 import './Document.css';
 
+/*
+function Document() {
+  const [documents, setDocuments] = useState([]);
+  const [filters, setFilters] = useState({ sort: "", type: "" });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSortMenu, setShowSortMenu] = useState(false);
+  const [showTypeMenu, setShowTypeMenu] = useState(false);
+
+  useEffect(() => {
+    // Lấy danh sách tài liệu từ backend
+    const fetchDocuments = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/documents');
+        setDocuments(response.data);
+      } catch (err) {
+        console.error("Error fetching documents:", err);
+      }
+    };
+    fetchDocuments();
+  }, []);
+  */
+
 function Document() {
   const [documents, setDocuments] = useState([
     { id: 1, title: "Hợp đồng lao động", updatedDate: "2023-11-01", expiryDate: "2025-11-01", dataType: "PDF", status: "Valid", selected: false },
