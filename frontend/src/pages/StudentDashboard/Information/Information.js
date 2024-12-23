@@ -32,9 +32,9 @@ function Information() {
 
   const navigate = useNavigate();
 
-  // Hàm chuyển hướng khi click vào "View More"
+ 
   const handleViewMore = (section) => {
-    navigate(`/dashboard/${section}-detail`);
+    navigate(`/student-dashboard/${section}-detail`);
   };
   
   
