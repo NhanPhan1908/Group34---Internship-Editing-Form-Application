@@ -29,17 +29,18 @@ function FormManager() {
 
   return (
     <div className="form-manager-container">
-      <h1>Form Manager</h1>
+      <h1>FORM MANAGER</h1>
 
       <div className="form-settings">
         <div className="setting-item">
-          <button onClick={handleFormCreate}>Create New Form</button>
           <div className="form-list">
             {forms.map((form) => (
               <div className="form-item" key={form.id}>
                 <span className="form-name">{form.name}</span>
-                <button onClick={() => handleFormEdit(form.id)}>Edit</button>
-                <button className="delete" onClick={() => handleFormDelete(form.id)}>Delete</button>
+                <div>
+                  <button onClick={() => handleFormEdit(form.id)}>Edit</button>
+                  <button className="delete" onClick={() => handleFormDelete(form.id)}>Delete</button>
+                </div>
               </div>
             ))}
           </div>
