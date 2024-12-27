@@ -2,6 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const bcrypt = require('bcrypt')
+const db = require('./db');
+const bodyParser = require('body-parser');
 
 app.use(express.json());
 
@@ -12,12 +15,12 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Controllers và Middleware
 const { tokenController, logoutController, loginController } = require('./authController');
 const { createFormController, getFormByIdController, updateFormController, deleteFormController } = require('./formController');
 const authenticateToken = require('./authMiddleware');
 
-// Routes
+const users = []
+
 app.post('/token', tokenController);
 
 app.delete('/logout', logoutController);
@@ -25,8 +28,8 @@ app.delete('/logout', logoutController);
 app.post('/login', loginController);
 
 const posts = [
-    { username: 'Saul', password: 'saul123', title: 'Goodman' },
-    { username: 'Kim', password: 'kim456', title: 'Wexler' },
+    { username: 'Saul', password: 'Goodman' },
+    { username: 'Kim', password: 'Wexler' }
 ];
 
 app.get('/posts', authenticateToken, (req, res) => {
@@ -43,6 +46,137 @@ app.delete('/forms/:id', deleteFormController);
 
 app.get('/', (req, res) => {
     res.json('Hello, World!');
+});
+
+app.get('/users', (req, res) => {
+    res.json(users)
+})
+
+app.post('/users', async (req, res) => {
+    try {
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(req.body.password, salt)
+        console.log(salt)
+        console.log(hashedPassword)
+        const user = { name: req.body.name, password: hashedPassword }
+        users.push(user)
+        res.status(201).send()
+    }
+    catch {
+        res.status(500).send()
+    }
+})
+
+app.post('/users/login', async (req, res) => {
+    const user = users.find(user => user.name == req.body.name)
+    if (user == null) {
+        return res.status(400).send('Cannot find user')
+    }
+    try {
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            res.send('Success')
+        } else {
+            res.send('Not Allowed !!!')
+        }
+    } catch {
+        res.status(500).send()
+    }
+})
+
+app.post('/register', async (req, res) => {
+    const { username, email, role, password } = req.body;
+  
+    try {
+      // Mã hóa mật khẩu
+      const hashedPassword = await bcrypt.hash(password, 10);
+  
+      // Lưu vào cơ sở dữ liệu
+      const query = 'INSERT INTO users (username, email, role, password) VALUES (?, ?, ?, ?)';
+      db.query(query, [username, email, role, hashedPassword], (err, result) => {
+        if (err) {
+          console.error('Lỗi khi lưu dữ liệu:', err);
+          if (err.code === 'ER_DUP_ENTRY') {
+            res.status(400).send({ message: 'Email already exists' });
+          } else {
+            res.status(500).send({ message: 'Server error' });
+          }
+          return;
+        }
+        res.status(201).send({ message: 'Registration successful!' });
+      });
+    } catch (error) {
+      console.error('Server error:', error);
+      res.status(500).send({ message: 'Server error' });
+    }
+  });
+
+const documents = []
+
+  function prepareDocumentStatus(docs) {
+    return docs.map((doc) => {
+      if (doc.status === "Valid") {
+        return { name: doc.name, frontendStatus: "Valid" };
+      } 
+      else {
+        return { name: doc.name, frontendStatus: "Invalid" };
+      }
+    });
+  }
+
+  const processedDocuments = prepareDocumentStatus(documents);
+
+  console.log("Frontend Document Status:");
+  processedDocuments.forEach((doc) =>
+    console.log(` - ${doc.name}: ${doc.frontendStatus}`)
+  );
+
+  const forms = [];
+
+function validateForm(form) {
+    if (!form.name || !form.documentType || !form.updatedDate || !form.expiryDate) {
+        return "Invalid";
+    }
+    const currentDate = new Date();
+    const expiryDate = new Date(form.expiryDate);
+    if (expiryDate < currentDate) {
+        return "Invalid";
+    }
+    return "Valid";
+}
+
+app.use(bodyParser.json());
+
+// Endpoint để lưu form vào cơ sở dữ liệu
+app.post('/forms/submit', async (req, res) => {
+  const { name, updatedDate, expiryDate, documentType } = req.body;
+  const status = validateForm(req.body); // Hàm xác thực dữ liệu
+  const sql = "INSERT INTO documents_info (name, updatedDate, expiryDate, documentType, status) VALUES (?, ?, ?, ?, ?)";
+  const ret = await db.query(sql, [name, updatedDate, expiryDate, documentType, status], (err, result) => {
+    if (err) {
+      console.error('Error inserting data:', err);
+    }
+  });
+
+  if (ret[0].insertId == undefined) {
+    res.status(500).json({ message: 'Error inserting data' });
+  } else {
+    res.status(201).json({ message: 'Form submitted', id: ret[0].insertId });
+  }
+});
+
+
+// Endpoint để lấy danh sách forms từ cơ sở dữ liệu
+app.get('/forms', (req, res) => {
+  const sql = `SELECT * FROM documents`;
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching data:', err);
+      return res.status(500).json({ message: 'Error fetching data' });
+    }
+
+    res.json(results);
+  });
 });
 
 // Khởi động server
