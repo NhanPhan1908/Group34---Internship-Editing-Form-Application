@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import './Document.css';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 function Document() {
-  const [documents, setDocuments] = useState([
-    { id: 1, title: "Hợp đồng lao động", updatedDate: "2023-11-01", expiryDate: "2025-11-01", dataType: "PDF", status: "Valid", selected: false },
-    { id: 2, title: "Giấy chứng nhận", updatedDate: "2023-09-15", expiryDate: "2024-09-15", dataType: "Image", status: "Pending", selected: false },
-    { id: 3, title: "Hóa đơn thanh toán", updatedDate: "2023-07-20", expiryDate: "2024-07-20", dataType: "Word", status: "Invalid", selected: false },
-    { id: 4, title: "Báo cáo tài chính", updatedDate: "2023-05-10", expiryDate: "2024-05-10", dataType: "Excel", status: "Valid", selected: false },
-    { id: 5, title: "Phiếu thu", updatedDate: "2023-10-01", expiryDate: "2024-10-01", dataType: "PDF", status: "Pending", selected: false },
-  ]);
-
+  const [documents, setDocuments] = useState([]);
   const [filters, setFilters] = useState({ sort: "", type: "" });
   const [searchQuery, setSearchQuery] = useState("");
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [showTypeMenu, setShowTypeMenu] = useState(false);
+
+  useEffect(() => {
+    // Lấy danh sách tài liệu từ backend
+    const fetchDocuments = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/forms/submit');
+        setDocuments(response.data);
+      } catch (err) {
+        console.error("Error fetching documents:", err);
+      }
+    };
+    fetchDocuments();
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);

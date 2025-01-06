@@ -27,6 +27,17 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "username": "m10m10", 
+    "email": "m10m10@gmail.com",
+    "password": "m10",
+    "role": "student"
+}
+
+###
 GET http://localhost:3000/
 
 ###
@@ -56,3 +67,55 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/forms/978ca102-4c54-48fb-9a0e-08b1de453db4
+
+
+###
+POST http://localhost:3000/forms/submit
+Content-Type: application/json
+
+{
+    "name": "Hóa đơn tiền điện",
+    "updatedDate": "2023-05-10",
+    "expiryDate": "2022-06-12",
+    "documentType": "Word",
+    "dataType": "Word"
+}
+
+###
+GET http://localhost:3000/forms
+
+###
+GET http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "username": "haibui"
+    ""
+}
+
+###
+POST http://localhost:3000/supervisors/internal
+Content-Type: application/json
+
+{
+    "name": "Phan Dang NhanNhan",
+    "work_unit": "USTH",
+    "email": "pdnpdn1@usth.edu.vn",
+    "phone_number": "0123456788"
+}
+
+###
+POST http://localhost:3000/students 
+Content-Type: application/json
+
+{
+    "name": "Bui Hai",
+    "date_of_birth": "2004-07-11",
+    "major": "ict",
+    "unit": "lab",
+    "year": "2024",
+    "location": "Hanoi",
+    "phone": "0972502884",
+    "topic": "internship",
+    "validation": "yes"
+}

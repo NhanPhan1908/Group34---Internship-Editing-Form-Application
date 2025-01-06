@@ -6,7 +6,7 @@ const adminLinks = [
   { path: '/admin-dashboard/home', label: 'Home' },
   { path: '/admin-dashboard/form-manager', label: 'Form Manager' },
   { path: '/admin-dashboard/manager-user', label: 'User Manager' },
-  { path: '/admin-dashboard/statistic', label: 'Statistic' },
+  { path: '/admin-dashboard/adminsetting', label: 'Setting' },
 ];
 
 function TopNavAdmin() {

@@ -1,46 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./UserManagerSupervisor.css";
+import axios from 'axios'; 
 
 function UserManagerSupervisor() {
-  const supervisors = [
-    {
-      id: 1,
-      name: "Pham Minh Tuan",
-      unit: "USTH",
-      email: "tuan.pham@usth.edu.vn",
-      phone: "0123456789",
-      students: [
-        { name: "Nguyen Thi Mai", studentId: "2021001", major: "ICT", topic: "AI Research" },
-        { name: "Le Hoang Nam", studentId: "2021002", major: "DS", topic: "Data Analysis" },
-      ],
-    },
-    {
-      id: 2,
-      name: "Nguyen Thi Lan",
-      unit: "Company",
-      email: "lan.nguyen@company.com",
-      phone: "0987654321",
-      students: [
-        { name: "Tran Thi Lan", studentId: "2021003", major: "CS", topic: "Web Development" },
-      ],
-    },
-  ];
+  const navigate = useNavigate();
+  const [supervisors, setSupervisors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  return (
+  useEffect(() => {
+    // Lấy dữ liệu từ backend
+    axios
+      .get("http://localhost:3000/supervisors/internal")
+      .then((response) => {
+        setSupervisors(response.data); // Cập nhật danh sách supervisor
+        setLoading(false); // Đặt lại loading thành false khi nhận dữ liệu
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false); // Đặt lại loading thành false khi có lỗi
+      });
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (supervisors.length === 0) {
+    return <p>No supervisors found.</p>;
+  }
+
+  // Hàm xử lý khi click vào một học sinh
+  const handleRowClick = (supervisorId, studentId) => {
+    navigate('/admin-dashboard/user-manager-student-detail/${supervisorId}/${studentId}');
+  };
+return (
     <div className="user-manager-supervisor">
       {supervisors.map((supervisor) => (
         <div key={supervisor.id} className="supervisor-card">
           <div className="supervisor-details">
-            <img
-              src={`https://via.placeholder.com/150?text=${supervisor.name.split(" ")[0]}`}
-              alt={supervisor.name}
-              className="supervisor-photo"
-            />
             <div className="supervisor-info">
               <h3>{supervisor.name}</h3>
-              <p>Unit: {supervisor.unit}</p>
+              <p>Unit: {supervisor.work_unit}</p>
               <p>Email: {supervisor.email}</p>
-              <p>Phone: {supervisor.phone}</p>
+              <p>Phone: {supervisor.phone_number}</p>
             </div>
           </div>
           <div className="students-list">
@@ -55,14 +58,24 @@ function UserManagerSupervisor() {
                 </tr>
               </thead>
               <tbody>
-                {supervisor.students.map((student, index) => (
-                  <tr key={index}>
-                    <td>{student.name}</td>
-                    <td>{student.studentId}</td>
-                    <td>{student.major}</td>
-                    <td>{student.topic}</td>
+                {supervisor.students && supervisor.students.length > 0 ? (
+                  supervisor.students.map((student, index) => (
+                    <tr
+                      key={index}
+                      onClick={() => handleRowClick(supervisor.id, student.studentId)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <td>{student.name}</td>
+                      <td>{student.studentId}</td>
+                      <td>{student.major}</td>
+                      <td>{student.topic}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="4">No students assigned</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>

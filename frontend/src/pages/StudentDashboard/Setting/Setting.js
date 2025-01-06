@@ -1,29 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+//import axios from "axios";
 import "./Setting.css";
 
 function Setting() {
   const navigate = useNavigate();
-
-  // Thông tin người dùng cập nhật
-  const userInfo = {
-    name: "Phan Đăng Nhân",
-    dob: "19/08/2003",
-    studentId: "BI12-336",
-    department: "Công nghệ thông tin",
-    course: "Công nghệ thông tin và truyền thông",
-    email: "nhandangphan1908@gmail.com",
-    phone: "0353473186",
-    avatar: "https://via.placeholder.com/150", 
-  };
-
+  const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const [isHelpOpen, setHelpOpen] = useState(false);
   const [isScreenOpen, setScreenOpen] = useState(false);
 
+  const userId = "123"; 
+
+/*
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
+        setUserInfo(response.data);
+      } catch (err) {
+        setError("Không thể tải thông tin người dùng.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserInfo();
+  }, [userId]);
+*/
+  useEffect(() => {
+    const mockData = {
+      id: "123",
+      name: "Nguyễn Văn A",
+      dob: "2000-01-01",
+      studentId: "B20DCCN123",
+      department: "Công nghệ Thông tin",
+      course: "Kỹ thuật phần mềm",
+      email: "nguyenvana@example.com",
+      phone: "0123456789",
+      avatar: "https://i.pravatar.cc/150?u=example-user"
+    };
+    setUserInfo(mockData);
+    setLoading(false);
+  }, []);
+  
+
   const toggleSettings = () => setSettingsOpen(!isSettingsOpen);
   const toggleHelp = () => setHelpOpen(!isHelpOpen);
   const toggleScreen = () => setScreenOpen(!isScreenOpen);
+
+  if (loading) return <div>Đang tải thông tin...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="setting-container">
@@ -40,45 +69,19 @@ function Setting() {
           <p><strong>Ngành:</strong> {userInfo.course}</p>
           <p><strong>Email:</strong> {userInfo.email}</p>
           <p><strong>Số điện thoại:</strong> {userInfo.phone}</p>
-          <button onClick={() => navigate("/student-dashboard/setting/update-info")}>
-            Cập nhật thông tin
-          </button>
+          <button onClick={() => navigate("/student-dashboard/setting/update-info")}>Cập nhật thông tin</button>
         </div>
       </div>
 
-      
       <div className="system-settings">
-        <div className="setting-item">
-          <button onClick={toggleSettings}>Cài đặt</button>
-          {isSettingsOpen && (
-            <div className="dropdown">
-              <p>Cài đặt hệ thống</p>
-              <p>Ngôn ngữ</p>
-            </div>
-          )}
-        </div>
-
-        <div className="setting-item">
-          <button onClick={toggleHelp}>Trợ giúp</button>
-          {isHelpOpen && (
-            <div className="dropdown">
-              <p>Trung tâm trợ giúp</p>
-              <p>Báo cáo</p>
-            </div>
-          )}
-        </div>
-
-        <div className="setting-item">
-          <button onClick={toggleScreen}>Màn hình</button>
-          {isScreenOpen && (
-            <div className="dropdown">
-              <p>Chế độ tối</p>
-              <p>Bàn phím</p>
-            </div>
-          )}
-        </div>
-
-        <div className="setting-item">
+        <h2>Tùy chọn hệ thống</h2>
+        <div className="setting-buttons">
+          <button onClick={() => console.log("Mở cài đặt hệ thống")}>Cài đặt hệ thống</button>
+          <button onClick={() => console.log("Chuyển đổi ngôn ngữ")}>Ngôn ngữ</button>
+          <button onClick={() => console.log("Truy cập trung tâm trợ giúp")}>Trung tâm trợ giúp</button>
+          <button onClick={() => console.log("Báo cáo vấn đề")}>Báo cáo</button>
+          <button onClick={() => console.log("Chuyển sang chế độ tối")}>Chế độ tối</button>
+          <button onClick={() => console.log("Mở cài đặt bàn phím")}>Bàn phím</button>
           <button onClick={() => navigate("/")}>Đăng xuất</button>
         </div>
       </div>

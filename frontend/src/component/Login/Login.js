@@ -10,21 +10,28 @@ function Login() {
   const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();  
-
+    e.preventDefault();
+  
     if (username && password && role) {
       try {
-        // Gửi yêu cầu đăng nhập tới backend
         const response = await axios.post('http://localhost:3000/login', {
           username,
           password,
-          role  
+          role,
         });
-
+  
         if (response.status === 200) {
           const data = response.data;
           localStorage.setItem('token', data.token);
-          navigate('/dashboard');
+  
+          // Điều hướng dựa trên role
+          if (role === 'Student') {
+            navigate('/student-dashboard');
+          } else if (role === 'Admin') {
+            navigate('/admin-dashboard');
+          } else if (role === 'Supervisor') {
+            navigate('/supervisor-dashboard');
+          }
         }
       } catch (error) {
         console.error('Login error:', error);
@@ -34,7 +41,6 @@ function Login() {
       alert('Please fill in all fields');
     }
   };
-
   return (
     <div className="login-container">
       <div className="login-box">

@@ -1,64 +1,60 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Thêm axios để gửi yêu cầu HTTP
 import './Signup.css';
 
+
 function SignUp() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('Student');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    
+  
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
-
-    
-    console.log('User signed up:', { firstName, lastName, email, role, password });
-    alert('Sign up successful! Redirecting to the dashboard...');
-
-   
-    if (role === 'Student') {
-      navigate('/student-dashboard');
-    } else if (role === 'Supervisor') {
-      navigate('/supervisor-dashboard');
-    } else if (role === 'Admin') {
-      navigate('/admin-dashboard');
+  
+    try {
+      // Gửi yêu cầu đăng ký tới backend
+      const response = await axios.post('http://localhost:3000/register', {
+        username,
+        email,
+        role,
+        password,
+      });
+  
+      if (response.status === 201) { // Xử lý khi đăng ký thành công
+        alert('Sign up successful! Please log in with your new account.');
+      } else {
+        alert('Sign up failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Sign up error:', error);
+      alert(error.response?.data?.message || 'An error occurred during sign up.');
+    } finally {
+  
+      navigate('/');
     }
   };
-
   return (
     <div className="signup-container">
       <div className="signup-box">
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="Enter your first name"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Enter your last name"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
               required
             />
           </div>
@@ -83,8 +79,8 @@ function SignUp() {
               onChange={(e) => setRole(e.target.value)}
               required
             >
-              <option value="Supervisor">Supervisor</option>
               <option value="Student">Student</option>
+              <option value="Supervisor">Supervisor</option>
               <option value="Admin">Admin</option>
             </select>
           </div>
@@ -113,7 +109,7 @@ function SignUp() {
             />
           </div>
 
-          <button type="submit">Sign Up</button>
+          <button onClick={() => navigate('/signup')} type="submit">Sign Up</button>
         </form>
       </div>
     </div>

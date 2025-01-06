@@ -39,7 +39,7 @@ function SideBarAdmin() {
     settings: {
       label: 'Settings',
       links: [
-        { path: '/admin-dashboard/settings', label: 'Admin Settings' },
+        { path: '/admin-dashboard/adminsetting', label: 'Admin Settings' },
       ],
     },
   };

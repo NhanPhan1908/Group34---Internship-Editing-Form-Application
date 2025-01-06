@@ -179,6 +179,89 @@ app.get('/forms', (req, res) => {
   });
 });
 
+app.use(bodyParser.json());
+
+// Endpoint để lưu Internal Supervisor
+app.post('/supervisors/internal', async (req, res) => {
+  const { name, work_unit, email, phone_number } = req.body;
+  const sql = `INSERT INTO internal_supervisors (name, work_unit, email, phone_number) VALUES (?, ?, ?, ?)`;
+  try {
+    const [result] = await db.query(sql, [name, work_unit, email, phone_number]);
+    res.status(201).json({ message: 'Internal Supervisor saved', id: result.insertId });
+  } catch (err) {
+    console.error('Error inserting data:', err);
+    res.status(500).json({ message: 'Error inserting data' });
+  }
+});
+
+// Endpoint để lưu External Supervisor
+app.post('/supervisors/external', async (req, res) => {
+  const { name, work_unit, email, phone_number, position } = req.body;
+  const sql = `
+    INSERT INTO external_supervisors (name, work_unit, email, phone_number, position) VALUES (?, ?, ?, ?, ?)`;
+
+  try {
+    const [result] = await db.query(sql, [name, work_unit, email, phone_number, position]);
+    res.status(201).json({ message: 'External Supervisor saved', id: result.insertId });
+  } catch (err) {
+    console.error('Error inserting data:', err);
+    res.status(500).json({ message: 'Error inserting data' });
+  }
+});
+
+// Endpoint để lấy danh sách Internal Supervisors
+app.get('/supervisors/internal', async (req, res) => {
+  const sql = 'SELECT * FROM internal_supervisors';
+
+  try {
+    const [results] = await db.query(sql);
+    res.json(results);
+  } catch (err) {
+    console.error('Error fetching data:', err);
+    res.status(500).json({ message: 'Error fetching data' });
+  }
+});
+
+// Endpoint để lấy danh sách External Supervisors
+app.get('/supervisors/external', async (req, res) => {
+  const sql = 'SELECT * FROM external_supervisors';
+
+  try {
+    const [results] = await db.query(sql);
+    res.json(results);
+  } catch (err) {
+    console.error('Error fetching data:', err);
+    res.status(500).json({ message: 'Error fetching data' });
+  }
+});
+
+app.post('/students', async (req, res) => {
+  const {name, date_of_birth, major, unit, year, location, phone, topic, validation} = req.body;
+  const sql = "INSERT INTO students (name, date_of_birth, major, unit, year, location, phone, topic, validation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  try {
+    const [result] = await db.query(sql, [name, date_of_birth, major, unit, year, location, phone, topic, validation]);
+    res.status(201).json({ message: 'Sutdent info saved', id: result.insertId });
+  }  catch (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).json({ message: 'Error inserting data' });
+  }
+});
+
+app.post('/update-student-info', async (req, res) => {
+  const { name, date_of_birth, major, year, email, phone} = req.body;
+  const sql = "INSERT INTO students (name, date_of_birth, major, year, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
+
+  try {
+    const [result] = await db.query(sql, [name, date_of_birth, major, year, email, phone]);
+
+    res.status(201).json({ message: 'Student info saved', id: result.insertId });
+  } catch (err) {
+    console.error('Error inserting data:', err);
+    res.status(500).json({ message: 'Error inserting data' });
+  }
+});
+
+
 // Khởi động server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,31 +1,66 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./UpdateInfo.css";
 
 function UpdateInfo() {
   const [formData, setFormData] = useState({
-    name: "John Doe", 
-    dob: "",
-    studentId: "",
-    department: "",
-    course: "",
-    email: "example@example.com",
+    name: "John Doe",
+    date_of_birth: "",
+    major: "",
+    year: "",
+    email: "",
     phone: "",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, avatar: e.target.files[0] });
+  };
+
+  const handleAvatarClick = () => {
+    document.getElementById("avatarInput").click();
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Thông tin cập nhật:", formData);
-    alert("Cập nhật thành công!");
+    setLoading(true);
+
+    try {
+      const formDataToSend = new FormData();
+      for (const key in formData) {
+        formDataToSend.append(key, formData[key]);
+      }
+
+      const response = await axios.post("http://localhost:3000/update-student-info", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 200) {
+        alert("Cập nhật thành công!");
+      } else {
+        setError("Đã có lỗi xảy ra. Vui lòng thử lại!");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Đã có lỗi xảy ra. Vui lòng thử lại!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="update-info-container">
       <h1>Cập nhật thông tin</h1>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <label>Họ và Tên</label>
         <input
@@ -34,7 +69,6 @@ function UpdateInfo() {
           value={formData.name}
           onChange={handleChange}
         />
-        
         <label>Ngày sinh</label>
         <input
           type="date"
@@ -42,7 +76,6 @@ function UpdateInfo() {
           value={formData.dob}
           onChange={handleChange}
         />
-        
         <label>Mã sinh viên</label>
         <input
           type="text"
@@ -50,7 +83,6 @@ function UpdateInfo() {
           value={formData.studentId}
           onChange={handleChange}
         />
-        
         <label>Khoa</label>
         <input
           type="text"
@@ -58,7 +90,6 @@ function UpdateInfo() {
           value={formData.department}
           onChange={handleChange}
         />
-        
         <label>Khóa học</label>
         <input
           type="text"
@@ -66,10 +97,8 @@ function UpdateInfo() {
           value={formData.course}
           onChange={handleChange}
         />
-        
         <label>Email (không thay đổi)</label>
         <input type="email" name="email" value={formData.email} readOnly />
-        
         <label>Số điện thoại</label>
         <input
           type="text"
@@ -77,8 +106,9 @@ function UpdateInfo() {
           value={formData.phone}
           onChange={handleChange}
         />
-
-        <button type="submit">Lưu thông tin</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Đang lưu..." : "Lưu thông tin"}
+        </button>
       </form>
     </div>
   );
